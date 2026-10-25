@@ -8,15 +8,28 @@ export const metadata: Metadata = pageMetadata(PAGES.pricing);
 
 const bodyClass = "text-pretty text-base leading-[1.65] text-ink-2 sm:text-[1.0625rem]";
 
+/** "A. B." as ["A.", "B."]: split after each full stop that ends a sentence. */
+function headlineSentences(text: string): string[] {
+  return text.split(/(?<=\.)\s+/);
+}
+
 /** The bands, drawn from src/lib/pricing.ts (tests/pricing.test.mjs checks the copy's table against the same file). */
 function PriceTable() {
   return (
     <div className="card p-6 sm:p-9">
-      <p className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-        <span className="text-[3.5rem] font-semibold leading-none tracking-[-0.03em] text-ink sm:text-[4.5rem]">
+      <p>
+        <span className="block text-[3.5rem] font-semibold leading-none tracking-[-0.03em] text-ink sm:text-[4.5rem]">
           {usd(PRICE_BANDS[0].annual)}
         </span>
-        <span className="text-pretty text-base text-muted sm:text-[1.0625rem]">{PRICING.headline.text}</span>
+        {/* The copy's two sentences, each on its own line: the annual price, then the monthly extra. */}
+        {headlineSentences(PRICING.headline.text).map((sentence, i) => (
+          <span
+            key={i}
+            className={`block text-pretty leading-[1.5] ${i === 0 ? "mt-4 text-[1.0625rem] font-medium text-ink-2 sm:text-[1.125rem]" : "mt-1 text-base text-muted sm:text-[1.0625rem]"}`}
+          >
+            {sentence}
+          </span>
+        ))}
       </p>
       <table className="mt-8 w-full border-collapse text-left text-base">
         <caption className="sr-only">Price per location a month, by band</caption>

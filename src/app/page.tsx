@@ -20,20 +20,24 @@ function Hero() {
         <div className="absolute inset-0 bg-[radial-gradient(35%_45%_at_95%_95%,rgb(127_152_134/0.16),transparent_70%)]" />
       </div>
       <div className="container-page pb-16 pt-12 sm:pt-16 lg:pb-24 lg:pt-20">
-        <div className="max-w-[60rem]">
-          <p className="eyebrow max-w-[38rem] leading-[1.5]">{HOME.eyebrow}</p>
+        {/* At 1280 and up the heading sets in two balanced lines across the page. */}
+        <div className="max-w-[76rem]">
+          <p className="eyebrow leading-[1.5]">{HOME.eyebrow}</p>
           <h1
             id="hero-title"
-            className="mt-6 text-balance text-[clamp(2.625rem,1.4rem+5.2vw,5.75rem)] font-semibold leading-[1.0] tracking-[-0.025em] text-ink"
+            className="mt-6 text-balance text-[clamp(2.625rem,1.4rem+5.2vw,5.5rem)] font-semibold leading-[1.0] tracking-[-0.025em] text-ink"
           >
             {HOME.h1}
           </h1>
-          <p className="lede mt-7 max-w-[46rem] sm:text-[1.25rem]">{HOME.lede}</p>
+          <p className="lede mt-7 max-w-[42rem] sm:text-[1.25rem]">{HOME.lede}</p>
           <CtaButtons className="mt-9" />
-          <p className="mt-7 flex items-center gap-3 text-[0.9375rem] text-subtle">
-            <span aria-hidden="true" className="size-2 shrink-0 rounded-full bg-sage" />
-            {HOME.trust}
-          </p>
+          <ul role="list" className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-2 text-[0.9375rem] text-subtle">
+            <li className="flex items-center gap-3">
+              <span aria-hidden="true" className="size-2 shrink-0 rounded-full bg-sage" />
+              {HOME.trust}
+            </li>
+            <li>{HOME.size}</li>
+          </ul>
         </div>
       </div>
     </section>
@@ -46,20 +50,23 @@ function Features() {
       <h2 id="features-title" className="sr-only">
         What Rhea does
       </h2>
+      {/* Two columns from md: each item spans two subgrid rows (heading, body), so the
+          bodies in a row start on one line whether a heading takes one line or two. */}
       <ul role="list" className="container-page grid gap-x-12 gap-y-10 md:grid-cols-2 lg:gap-y-14 xl:gap-x-20">
         {HOME.features.map((feature, i) => (
-          <li key={feature.title} className="flex min-w-0 items-start gap-4 sm:gap-5">
-            <span className="icon-tile size-12 shrink-0 sm:size-14">
+          <li
+            key={feature.title}
+            className="grid min-w-0 grid-cols-[auto_minmax(0,1fr)] gap-x-4 gap-y-2 sm:gap-x-5 md:row-span-2 md:grid-rows-subgrid"
+          >
+            <span className="icon-tile row-span-2 size-12 shrink-0 sm:size-14">
               <Icon name={FEATURE_ICONS[i]} className="size-6 sm:size-7" strokeWidth={1.5} />
             </span>
-            <div className="min-w-0">
-              <h3 className="text-balance text-[1.1875rem] font-semibold tracking-[-0.015em] sm:text-[1.3125rem]">
-                {feature.title}
-              </h3>
-              <p className="mt-1.5 max-w-[34rem] text-pretty text-base leading-[1.6] text-muted sm:text-[1.0625rem]">
-                {feature.body}
-              </p>
-            </div>
+            <h3 className="self-start text-balance text-[1.1875rem] font-semibold leading-[1.3] tracking-[-0.015em] sm:text-[1.3125rem]">
+              {feature.title}
+            </h3>
+            <p className="max-w-[34rem] text-pretty text-base leading-[1.6] text-ink-2 sm:text-[1.0625rem] xl:text-[1.125rem]">
+              {feature.body}
+            </p>
           </li>
         ))}
       </ul>

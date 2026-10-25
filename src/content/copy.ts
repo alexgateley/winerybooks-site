@@ -76,7 +76,9 @@ export const FOOTER_LINE = "Winery Books is Rhea for wineries, operated by Grip 
 /* ------------------------------------------------------------------ */
 
 export const HOME = {
-  eyebrow: "For owner-run wineries, 1,000 to 25,000 cases, mostly direct to consumer",
+  eyebrow: "For owner-run wineries, mostly direct to consumer",
+  /** The size the eyebrow used to carry, kept beside the pilot line. */
+  size: "For wineries of 1,000 to 25,000 cases.",
   h1: "The tasting room’s books and staffing, daily.",
   lede: "Rhea turns each tasting room’s day into balanced books by morning: flights, bottles, club pickups, tips, card fees and deposits. Labor % from the time clock, and next week’s hours from your own history. Statements, bills and the month close too. QuickBooks optional. Your CPA keeps the winemaking costs, excise tax and vintage inventory.",
   primaryButton: "Join the pilot waitlist",

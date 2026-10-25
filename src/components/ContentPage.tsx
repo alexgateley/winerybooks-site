@@ -130,20 +130,21 @@ export function Waitlist() {
   return (
     <section id="waitlist" aria-labelledby="waitlist-title" className="py-20 lg:py-28">
       <div className="container-page">
-        <div className="relative isolate overflow-hidden rounded-[2rem] bg-ink px-5 py-12 text-white sm:px-10 sm:py-14 lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,27rem)] lg:items-center lg:gap-12 lg:p-12 xl:grid-cols-[minmax(0,1fr)_minmax(0,31rem)] xl:gap-16 xl:p-16">
+        {/* The eyebrow and heading run across the card; the body sits beside the form from lg. */}
+        <div className="relative isolate overflow-hidden rounded-[2rem] bg-ink px-5 py-12 text-white sm:px-10 sm:py-14 lg:p-12 xl:p-16">
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(55%_70%_at_0%_0%,rgb(127_152_134/0.28),transparent_70%),radial-gradient(40%_50%_at_100%_100%,rgb(255_255_255/0.06),transparent_70%)]"
           />
-          <div>
-            <p className="eyebrow text-white/70">Pilot waitlist</p>
-            <h2 id="waitlist-title" className="h2 mt-5 text-white">
-              {WAITLIST_CTA.heading}
-            </h2>
-            <p className="lede mt-5 max-w-[32rem] text-white/75">{WAITLIST_CTA.body}</p>
-          </div>
-          <div className="card mt-10 p-5 text-ink shadow-[0_30px_60px_-30px_rgb(0_0_0/0.6)] sm:p-8 lg:mt-0">
-            <WaitlistForm />
+          <p className="eyebrow text-white/70">Pilot waitlist</p>
+          <h2 id="waitlist-title" className="h2 mt-5 text-white">
+            {WAITLIST_CTA.heading}
+          </h2>
+          <div className="mt-6 lg:mt-10 lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,28rem)] lg:items-start lg:gap-12 xl:grid-cols-[minmax(0,1fr)_minmax(0,31rem)] xl:gap-16">
+            <p className="lede max-w-[32rem] text-white/75">{WAITLIST_CTA.body}</p>
+            <div className="card mt-10 p-5 text-ink shadow-[0_30px_60px_-30px_rgb(0_0_0/0.6)] sm:p-8 lg:mt-0">
+              <WaitlistForm />
+            </div>
           </div>
         </div>
       </div>

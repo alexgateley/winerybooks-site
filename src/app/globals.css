@@ -89,9 +89,14 @@
   [id] {
     scroll-margin-top: 7rem;
   }
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     [id] {
-      scroll-margin-top: 6rem;
+      scroll-margin-top: 8rem;
+    }
+  }
+  @media (min-width: 1280px) {
+    [id] {
+      scroll-margin-top: 6.5rem;
     }
   }
 
@@ -269,6 +274,21 @@
         0 1px 0 var(--line),
         0 10px 30px -22px rgb(14 17 22 / 0.35);
     }
+  }
+}
+
+/* The header's second row of links: one line that scrolls sideways, no scrollbar,
+   faded at the right edge on phones where it runs past the screen. */
+.nav-scroll {
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+}
+.nav-scroll::-webkit-scrollbar {
+  display: none;
+}
+@media (max-width: 639.98px) {
+  .nav-scroll {
+    mask-image: linear-gradient(to right, #000 calc(100% - 3rem), transparent);
   }
 }
 

@@ -3,8 +3,13 @@ import { Wordmark } from "@/components/Logo";
 import { NAV } from "@/content/copy";
 import { APP_SIGN_IN_URL, DEMO_URL } from "@/lib/site";
 
-const navLinkClass = "rounded-md font-medium text-ink-2 transition-colors hover:text-ink";
+const navLinkClass = "whitespace-nowrap rounded-md font-medium text-ink-2 transition-colors hover:text-ink";
 
+/*
+ * From xl (1280) the top bar holds the logo, the five page links and the actions.
+ * Below xl the five links move to a second row: one line that scrolls sideways if it
+ * has to (never wraps), with Sign in and See the demo at its end on phones.
+ */
 export function SiteHeader() {
   return (
     <header className="site-header sticky top-0 z-50 backdrop-blur-md backdrop-saturate-150">
@@ -14,56 +19,58 @@ export function SiteHeader() {
       >
         Skip to content
       </a>
-      <div className="container-page flex h-14 items-center justify-between gap-4 lg:h-[4.5rem] xl:grid xl:h-[5.25rem] xl:grid-cols-[1fr_auto_1fr]">
-        <Link href="/" aria-label="Winery Books, by Rhea: home" className="justify-self-start rounded-md">
+      <div className="container-page flex h-14 items-center justify-between gap-4 lg:h-[4.5rem] xl:h-[5.25rem]">
+        <Link href="/" aria-label="Winery Books, by Rhea: home" className="shrink-0 rounded-md">
           <Wordmark />
         </Link>
 
-        <nav aria-label="Primary" className="hidden lg:block">
-          <ul className="flex items-center gap-7 xl:gap-9">
-            {NAV.map((link) => (
-              <li key={link.href}>
-                <Link href={link.href} className={`${navLinkClass} text-[1rem] xl:text-[1.0625rem]`}>
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <div className="flex min-w-0 items-center">
+          <nav aria-label="Primary" className="hidden xl:block">
+            <ul className="flex items-center gap-8">
+              {NAV.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className={`${navLinkClass} text-[1.0625rem]`}>
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <span aria-hidden="true" className="mx-8 hidden h-6 w-px bg-line-strong xl:block" />
 
-        <div className="flex items-center gap-4 justify-self-end sm:gap-6">
-          <a href={APP_SIGN_IN_URL} className={`${navLinkClass} hidden text-[0.9375rem] sm:inline lg:text-base`}>
-            Sign in
-          </a>
-          <a href={DEMO_URL} className={`${navLinkClass} hidden text-[0.9375rem] sm:inline lg:text-base`}>
-            See the demo
-          </a>
-          <Link
-            href="/#waitlist"
-            className="btn-primary h-10 px-4 text-[0.9375rem] sm:h-11 sm:px-5 lg:h-12 lg:px-6 lg:text-base"
-          >
-            Join the waitlist
-          </Link>
+          <div className="flex shrink-0 items-center gap-5 xl:gap-8">
+            <a href={APP_SIGN_IN_URL} className={`${navLinkClass} hidden text-[0.9375rem] sm:inline lg:text-base xl:text-[1.0625rem]`}>
+              Sign in
+            </a>
+            <a href={DEMO_URL} className={`${navLinkClass} hidden text-[0.9375rem] sm:inline lg:text-base xl:text-[1.0625rem]`}>
+              See the demo
+            </a>
+            <Link
+              href="/#waitlist"
+              className="btn-primary h-10 shrink-0 whitespace-nowrap px-4 text-[0.9375rem] sm:h-11 sm:px-5 lg:h-12 lg:px-6 lg:text-base"
+            >
+              Join the waitlist
+            </Link>
+          </div>
         </div>
       </div>
 
-      {/* Below lg: the same links as a compact second row (no JS menu needed); Sign in and the demo join it on phones. */}
-      <nav aria-label="Primary" className="border-t border-line/70 lg:hidden">
-        <ul className="container-page flex flex-wrap items-center justify-center gap-x-5 gap-y-1 py-1.5 text-sm sm:gap-x-8">
+      <nav aria-label="Primary" className="border-t border-line/70 xl:hidden">
+        <ul className="nav-scroll container-page flex h-10 items-center gap-6 overflow-x-auto whitespace-nowrap text-sm sm:gap-8 sm:text-[0.9375rem]">
           {NAV.map((link) => (
-            <li key={link.href}>
-              <Link href={link.href} className={`${navLinkClass} inline-flex min-h-8 items-center px-0.5`}>
+            <li key={link.href} className="shrink-0">
+              <Link href={link.href} className={`${navLinkClass} inline-flex min-h-8 items-center`}>
                 {link.label}
               </Link>
             </li>
           ))}
-          <li className="sm:hidden">
-            <a href={APP_SIGN_IN_URL} className={`${navLinkClass} inline-flex min-h-8 items-center px-0.5`}>
+          <li className="shrink-0 sm:hidden">
+            <a href={APP_SIGN_IN_URL} className={`${navLinkClass} inline-flex min-h-8 items-center`}>
               Sign in
             </a>
           </li>
-          <li className="sm:hidden">
-            <a href={DEMO_URL} className={`${navLinkClass} inline-flex min-h-8 items-center px-0.5`}>
+          <li className="shrink-0 pr-8 sm:hidden">
+            <a href={DEMO_URL} className={`${navLinkClass} inline-flex min-h-8 items-center`}>
               See the demo
             </a>
           </li>

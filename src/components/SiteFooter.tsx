@@ -20,60 +20,59 @@ export function SiteFooter() {
   return (
     <footer className="border-t border-line bg-paper">
       <div className="container-page py-14 lg:py-16">
-        <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
-          <div>
+        {/* The brand, then two link columns spread across the width (side by side on phones). */}
+        <div className="grid grid-cols-2 gap-x-8 gap-y-10 md:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)_minmax(0,1fr)] md:gap-x-12">
+          <div className="col-span-2 md:col-span-1">
             <Link href="/" aria-label="Winery Books, by Rhea: home" className="inline-block rounded-md">
               <Wordmark size="footer" />
             </Link>
             <p className="mt-5 max-w-[22rem] text-pretty text-[0.9375rem] leading-relaxed text-muted">{FOOTER_LINE}</p>
           </div>
 
-          <div className="grid gap-x-14 gap-y-8 sm:grid-cols-2">
-            <nav aria-label="Footer">
-              <ul className="space-y-3 text-[0.9375rem] font-medium">
-                {NAV.map((link) => (
-                  <li key={link.href}>
-                    <Link href={link.href} className={linkClass}>
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
+          <nav aria-label="Footer">
             <ul className="space-y-3 text-[0.9375rem] font-medium">
-              <li>
-                <Link href="/#waitlist" className={linkClass}>
-                  Join the waitlist
-                </Link>
-              </li>
-              <li>
-                <a href={DEMO_URL} className={linkClass}>
-                  See the demo
-                </a>
-              </li>
-              <li>
-                <a href={APP_SIGN_IN_URL} className={linkClass}>
-                  Sign in
-                </a>
-              </li>
-              <li>
-                <a href={RHEA_URL} className={linkClass}>
-                  Rhea, by {LEGAL_ENTITY}
-                </a>
-              </li>
+              {NAV.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className={linkClass}>
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
-          </div>
+          </nav>
+          <ul className="space-y-3 text-[0.9375rem] font-medium">
+            <li>
+              <Link href="/#waitlist" className={linkClass}>
+                Join the waitlist
+              </Link>
+            </li>
+            <li>
+              <a href={DEMO_URL} className={linkClass}>
+                See the demo
+              </a>
+            </li>
+            <li>
+              <a href={APP_SIGN_IN_URL} className={linkClass}>
+                Sign in
+              </a>
+            </li>
+            <li>
+              <a href={RHEA_URL} className={linkClass}>
+                Rhea, by {LEGAL_ENTITY}
+              </a>
+            </li>
+          </ul>
         </div>
 
-        <div className="mt-12 flex flex-col gap-4 border-t border-line pt-6 text-sm text-subtle sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-12 flex flex-col gap-4 border-t border-line pt-6 text-[0.9375rem] text-muted sm:flex-row sm:items-center sm:justify-between">
           <ul className="flex flex-wrap items-center gap-x-6 gap-y-2">
             <li>
-              <a href={`mailto:${CONTACT_EMAIL}`} className="rounded-md select-text hover:text-ink">
+              <a href={`mailto:${CONTACT_EMAIL}`} className="rounded-md font-medium text-ink-2 select-text hover:text-ink">
                 {CONTACT_EMAIL}
               </a>
             </li>
             <li>
-              <a href={`tel:${CONTACT_PHONE_TEL}`} className="rounded-md select-text hover:text-ink">
+              <a href={`tel:${CONTACT_PHONE_TEL}`} className="rounded-md font-medium text-ink-2 select-text hover:text-ink">
                 {CONTACT_PHONE}
               </a>
             </li>
