@@ -1,0 +1,313 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens. The site is light-only by design, so colors are fixed and the
+ * body always sets an explicit background and text color.
+ */
+:root {
+  --paper: #f5f2ed; /* warm off-white, hero + page */
+  --paper-2: #faf9f6; /* lighter band */
+  --surface: #ffffff;
+  --ink: #0e1116; /* headlines, primary button */
+  --ink-2: #23272e;
+  --muted: #545961; /* body copy: 6.3:1 on --paper */
+  --subtle: #62676f; /* small print: 5.1:1 on --paper */
+  --line: #e4dfd7;
+  --line-strong: #d6d0c6;
+  --field-border: #8f8a81; /* form control outline: 3.4:1 on white (WCAG 1.4.11) */
+  --field-border-hover: #6b665e;
+  --tile: #f3f1ed; /* icon tile fill */
+  --sage: #7f9886;
+  --sage-ink: #3f5c4a; /* sage text: 6.6:1 on white */
+  --sage-wash: #e9efe9;
+  --danger: #b42318;
+  --danger-wash: #fdf1ef;
+  --focus: #0e1116;
+
+  /* Pricing comparison chart: Rhea in sage ink (7.4:1 on white), every other
+     option in one warm grey (3.4:1). Labels carry identity, never color alone. */
+  --chart-rhea: #3f5c4a;
+  --chart-other: #8f8a81;
+
+  /* One radius and one elevation for every outer card. */
+  --radius-card: 1.5rem;
+  --shadow-card:
+    0 1px 2px rgb(14 17 22 / 0.04),
+    0 24px 48px -36px rgb(14 17 22 / 0.25);
+
+  color-scheme: light;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-muted: var(--muted);
+  --color-subtle: var(--subtle);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-sage: var(--sage);
+  --color-sage-ink: var(--sage-ink);
+  --color-sage-wash: var(--sage-wash);
+  --color-danger: var(--danger);
+  --color-danger-wash: var(--danger-wash);
+  --color-field: var(--field-border);
+  --color-field-hover: var(--field-border-hover);
+  --color-tile: var(--tile);
+  --color-chart-rhea: var(--chart-rhea);
+  --color-chart-other: var(--chart-other);
+  --font-sans: var(--font-inter-tight), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+@layer base {
+  html {
+    background: var(--paper);
+    color: var(--ink);
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    text-rendering: optimizeLegibility;
+    overflow-x: clip;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  /* Leave room for the sticky header when jumping to in-page anchors
+     (taller on phones, where the header has a second row of links). */
+  [id] {
+    scroll-margin-top: 7rem;
+  }
+  @media (min-width: 768px) {
+    [id] {
+      scroll-margin-top: 6rem;
+    }
+  }
+
+  ::selection {
+    background: #d9e3db;
+    color: var(--ink);
+  }
+
+  /* Visible, consistent keyboard focus everywhere (utilities can override). */
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  .container-page {
+    width: 100%;
+    max-width: 1480px;
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+  @media (min-width: 640px) {
+    .container-page {
+      padding-inline: 2rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .container-page {
+      padding-inline: 3rem;
+    }
+  }
+  @media (min-width: 1440px) {
+    .container-page {
+      padding-inline: 5rem;
+    }
+  }
+
+  .eyebrow {
+    font-size: 0.8125rem;
+    line-height: 1.2;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--subtle);
+  }
+
+  .h2 {
+    font-size: clamp(2rem, 1.35rem + 2.4vw, 3.25rem);
+    line-height: 1.06;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+
+  .lede {
+    font-size: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
+    line-height: 1.55;
+    color: var(--muted);
+    text-wrap: pretty;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    border-radius: 0.75rem;
+    background: var(--ink);
+    color: #fff;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    box-shadow:
+      0 1px 0 rgb(255 255 255 / 0.08) inset,
+      0 1px 2px rgb(14 17 22 / 0.16),
+      0 8px 20px -10px rgb(14 17 22 / 0.45);
+    transition:
+      background-color 160ms ease,
+      transform 160ms ease,
+      box-shadow 160ms ease;
+  }
+  .btn-primary:hover {
+    background: var(--ink-2);
+  }
+  .btn-primary:active {
+    transform: translateY(1px);
+  }
+  .btn-primary .btn-arrow {
+    transition: transform 160ms ease;
+  }
+  .btn-primary:hover .btn-arrow {
+    transform: translateX(3px);
+  }
+
+  /* Flat warm-grey tile with a hairline border, as in the mockup. */
+  .icon-tile {
+    display: inline-grid;
+    place-items: center;
+    border-radius: 0.875rem;
+    border: 1px solid var(--line);
+    background: var(--tile);
+    color: var(--ink);
+  }
+
+  .card {
+    border-radius: var(--radius-card);
+    border: 1px solid var(--line);
+    background: var(--surface);
+    box-shadow: var(--shadow-card);
+  }
+
+  /* Prose for the legal pages. */
+  .legal h2 {
+    margin-top: 2.75rem;
+    font-size: 1.375rem;
+    line-height: 1.25;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+    color: var(--ink);
+  }
+  .legal p,
+  .legal li {
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    color: var(--muted);
+  }
+  .legal p {
+    margin-top: 1rem;
+  }
+  .legal ul {
+    margin-top: 1rem;
+    padding-left: 1.25rem;
+    list-style: disc;
+  }
+  .legal li + li {
+    margin-top: 0.5rem;
+  }
+  .legal li::marker {
+    color: var(--line-strong);
+  }
+  .legal strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .legal a {
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-color: var(--line-strong);
+    text-underline-offset: 3px;
+  }
+  .legal a:hover {
+    text-decoration-color: var(--ink);
+  }
+}
+
+/* Header gains a hairline and soft shadow once the page scrolls (CSS only). */
+.site-header {
+  background-color: rgb(245 242 237 / 0.72);
+}
+@supports (animation-timeline: scroll()) {
+  .site-header {
+    animation: header-elevate linear both;
+    animation-timeline: scroll(root);
+    animation-range: 0 96px;
+  }
+  @keyframes header-elevate {
+    from {
+      box-shadow: 0 1px 0 rgb(14 17 22 / 0);
+    }
+    to {
+      background-color: rgb(250 249 246 / 0.88);
+      box-shadow:
+        0 1px 0 var(--line),
+        0 10px 30px -22px rgb(14 17 22 / 0.35);
+    }
+  }
+}
+
+/* FAQ disclosure marker. */
+.faq summary {
+  list-style: none;
+}
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+.faq .faq-icon {
+  transition: transform 200ms ease;
+}
+.faq details[open] .faq-icon {
+  transform: rotate(45deg);
+}
+
+/* Native selects with a custom chevron. */
+.select-chevron {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23545961' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.85rem center;
+  background-size: 1.1rem;
+  padding-right: 2.75rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .site-header {
+    animation: none;
+    background-color: rgb(250 249 246 / 0.9);
+    box-shadow: 0 1px 0 var(--line);
+  }
+}

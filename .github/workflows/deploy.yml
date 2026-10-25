@@ -1,0 +1,49 @@
+# Builds the static site and publishes it to GitHub Pages on every push to main. Lint and build only, to keep
+# Actions time small: `npm run build` runs the pricing test first and the SEO and wording check last.
+# Pages settings: Source = "GitHub Actions"; custom domain = winerybooks.com (repo Settings → Pages).
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One deploy at a time; let a running deploy finish.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run build
+        env:
+          # Public form address: the same Formspree form as rheafi.com (sales@rheafi.com). Not a secret (it is on the page).
+          # A repository variable of the same name (Settings → Secrets and variables → Actions → Variables) overrides it.
+          NEXT_PUBLIC_WAITLIST_URL: ${{ vars.NEXT_PUBLIC_WAITLIST_URL || 'https://formspree.io/f/mdeayrjq' }}
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5
