@@ -93,3 +93,16 @@ export function breadcrumbList(trail: Crumb[]) {
     })),
   };
 }
+
+/** A FAQPage for an inner page that shows its questions. */
+export function faqPage(faqs: { q: string; a: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.q,
+      acceptedAnswer: { "@type": "Answer", text: faq.a },
+    })),
+  };
+}
