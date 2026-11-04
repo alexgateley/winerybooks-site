@@ -10,13 +10,16 @@ export const DEMO_URL = "https://demo.rheafi.com/demo";
 
 /** Rhea's own site, and its privacy notice and terms (winerybooks.com has no legal pages of its own). */
 export const RHEA_URL = "https://rheafi.com/";
+export const FRANCHIFI_URL = "https://franchifi.com/";
 export const PRIVACY_URL = "https://rheafi.com/privacy/";
 export const TERMS_URL = "https://rheafi.com/terms/";
 
 export const CONTACT_EMAIL = "sales@rheafi.com";
 export const CONTACT_PHONE = "(707) 394-5086";
 export const CONTACT_PHONE_TEL = "+17073945086";
-export const INSTAGRAM_URL = "https://www.instagram.com/runonrhea/";
+/** The winery books account's own Instagram (not Rhea's), in the footer and structured data (sameAs). */
+export const INSTAGRAM_HANDLE = "@thewinerybooks";
+export const INSTAGRAM_URL = "https://www.instagram.com/thewinerybooks/";
 
 export const LEGAL_ENTITY = "Grip Theory LLC";
 export const COPYRIGHT_YEAR = 2026;
