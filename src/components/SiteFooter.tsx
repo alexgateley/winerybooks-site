@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Icon } from "@/components/Icon";
 import { Wordmark } from "@/components/Logo";
 import { FOOTER_LINE, NAV } from "@/content/copy";
 import {
@@ -8,6 +9,8 @@ import {
   CONTACT_PHONE_TEL,
   COPYRIGHT_YEAR,
   DEMO_URL,
+  INSTAGRAM_HANDLE,
+  INSTAGRAM_URL,
   LEGAL_ENTITY,
   PRIVACY_URL,
   RHEA_URL,
@@ -74,6 +77,18 @@ export function SiteFooter() {
             <li>
               <a href={`tel:${CONTACT_PHONE_TEL}`} className="rounded-md font-medium text-ink-2 select-text hover:text-ink">
                 {CONTACT_PHONE}
+              </a>
+            </li>
+            <li>
+              <a
+                href={INSTAGRAM_URL}
+                rel="me noopener"
+                aria-label="Instagram"
+                title={`Instagram, ${INSTAGRAM_HANDLE}`}
+                className="inline-flex items-center gap-1.5 rounded-md font-medium text-ink-2 hover:text-ink"
+              >
+                <Icon name="instagram" className="h-4 w-4" />
+                {INSTAGRAM_HANDLE}
               </a>
             </li>
             <li>
