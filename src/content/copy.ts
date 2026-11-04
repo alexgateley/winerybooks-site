@@ -24,6 +24,13 @@ export const PAGES = {
     description:
       "Each tasting room’s day booked by morning: flights, bottles, club pickups and deposits. Labor % daily and the week you’re posting, from your own history.",
   },
+  staffing: {
+    path: "/staffing/",
+    crumb: "Staffing",
+    title: "Tasting room staffing from your own history",
+    description:
+      "How many staff does a tasting room need? An estimate by weekday, weather and events, from your own sales history. Hours before you write the schedule.",
+  },
   wineClub: {
     path: "/wine-club/",
     crumb: "Wine club",
@@ -55,7 +62,7 @@ export const PAGES = {
 } satisfies Record<string, PageMeta>;
 
 /** The header and footer links, in the copy's order. */
-export const NAV = [PAGES.tastingRoom, PAGES.wineClub, PAGES.connect, PAGES.pricing, PAGES.about].map((page) => ({
+export const NAV = [PAGES.tastingRoom, PAGES.staffing, PAGES.wineClub, PAGES.connect, PAGES.pricing, PAGES.about].map((page) => ({
   href: page.path,
   label: page.crumb,
 }));
@@ -238,6 +245,133 @@ export const TASTING_ROOM = {
     closing:
       "The morning email carries the week’s lines on your schedule-writing day. Look back shows sales per labor hour by weekday, over- and under-staffed days, and what holidays and your own events do to each room. An estimate from your own history, never a promise. Only the weather is a forecast, the Weather Service’s. Rhea changes no schedule.",
   },
+};
+
+/* ------------------------------------------------------------------ */
+/* /staffing/                                                         */
+/* ------------------------------------------------------------------ */
+
+export const STAFFING = {
+  h1: "How many staff does a tasting room need?",
+  lede: "winerybooks by Rhea gives each tasting room an estimate from its own history: what it usually sells that weekday, what weather, holidays and your own events have done to that room, and the hours that suggests.",
+  saturday: {
+    title: "The Saturday problem",
+    body: [
+      "It is Thursday and you are writing the schedule. Saturday could be a sunny 75°F day with the patio full, or a rainy one with half the cars. Same room, same weekday, and the right crew can differ by several people.",
+      "Add a release weekend, or a bus tour booked for 2 p.m. Schedule for the quiet day and the line backs up. Schedule for the busy one and you pay for people at an empty bar. Most owners settle it by feel. Rhea settles it with your own numbers.",
+    ],
+  },
+  how: {
+    title: "How Rhea works it out",
+    bullets: [
+      [
+        {
+          lead: "A baseline by weekday",
+          text: ": what your room usually sells on that weekday, from its last eight comparable days. Rhea compares nothing until it has four weeks of history.",
+        },
+      ],
+      [
+        {
+          lead: "Lifts it learns",
+          text: ": what moves that number at your room, learned from your own tasting room sales. Holiday weekends, harvest, a hot afternoon, rain. Weather comes from the National Weather Service’s seven-day forecast and counts only where it has measurably moved sales at that room.",
+        },
+      ],
+      [
+        {
+          lead: "Your calendar notes",
+          text: ": tell Rhea about a release weekend or a bus tour with one note, the kind and how much busier or slower. The estimate shows “with your note” beside Rhea’s own number, and learns from the day once it is past.",
+        },
+      ],
+      [
+        {
+          lead: "The hours arithmetic",
+          text: ": the larger of your minimum crew, or expected sales times your labor target, divided by your average wage. You set the crew, the target and the wage. You also get a range, and the hours for a busy day.",
+        },
+      ],
+    ] as Bullet[][],
+  },
+  example: {
+    title: "One example, in round numbers",
+    intro:
+      "An example, not your room. The minimum crew is 2 people for a 7-hour day, so 14 hours. The labor target is 25% of sales. The average wage is 25 dollars an hour.",
+    lines: [
+      [
+        {
+          lead: "A usual Saturday",
+          text: ": 3,000 dollars in sales, likely 2,400 to 3,600. 3,000 × 25% ÷ 25 = 30 hours.",
+        },
+      ],
+      [{ lead: "A rainy Saturday", text: ": 1,800 dollars. 1,800 × 25% ÷ 25 = 18 hours." }],
+      [
+        {
+          lead: "A release weekend note",
+          text: ": 4,200 dollars with your note. 4,200 × 25% ÷ 25 = 42 hours.",
+        },
+      ],
+      [
+        {
+          lead: "A slow Tuesday",
+          text: ": 700 dollars. The arithmetic says 7 hours, so the minimum crew’s 14 hours holds.",
+        },
+      ],
+    ] as Bullet[][],
+    closing: "Made-up numbers to show the arithmetic. Your room’s own history sets the real ones.",
+  },
+  morning: {
+    title: "The morning number and the scorecard",
+    body: [
+      "On the day you write the schedule, each room’s numbers arrive in the morning email and on the Labor page: usually this, likely this range, why it moved, and the hours.",
+      "Rhea freezes those numbers when you see them, then checks them against what the room sold. It says how it did in one plain sentence, for example: “within 10% on 22 of the last 28 days.” Where it was wrong, you see that too.",
+    ],
+  },
+  needs: {
+    title: "What it needs",
+    bullets: [
+      { text: "Your POS connected: Square, or Commerce7 and WineDirect by their daily sales report today." },
+      { text: "Four weeks of history from the tasting room before it compares anything." },
+      { text: "A time clock, so labor % and hours can be set beside the estimate: Square, Clover, Toast, 7shifts or a time-punch report." },
+    ] as Bullet[],
+  },
+  isNot: {
+    title: "What it is not",
+    bullets: [
+      { text: "Not a schedule. Rhea changes nothing in your POS, club software or time clock." },
+      { text: "Not a promise. It is an estimate from your own history. Only the weather is a forecast, the National Weather Service’s." },
+      { text: "Not a reservation reader. Tell it about a booked tour or event with one note." },
+      { text: "Not payroll. Your provider pays the team." },
+    ] as Bullet[],
+  },
+  pricing: {
+    title: "What it costs",
+    body: "Staffing estimates come with every plan, with or without QuickBooks. $149 per tasting room a month, billed annually. Billed monthly, $20 more per location. 7-day free trial, no payment method.",
+    linkText: "See the full pricing",
+  },
+  faqs: [
+    {
+      q: "How many staff does a tasting room need?",
+      a: "It depends on the weekday, the weather, the season and what you have on. Rhea works it out from your room’s own sales: expected sales times your labor target, divided by your average wage, never below the fewest on shift you set.",
+    },
+    {
+      q: "Does weather change tasting room staffing?",
+      a: "Sometimes. Rhea uses the National Weather Service’s seven-day forecast, and counts weather only at a room where it has measurably moved sales.",
+    },
+    {
+      q: "Can I tell it about a release weekend or a bus tour?",
+      a: "Yes, with one note: the kind, and how much busier or slower. Rhea shows its own number and the number “with your note”, and learns from the day once it is past.",
+    },
+    {
+      q: "How soon does it work?",
+      a: "Once your POS is connected and the room has four weeks of sales. Before that, Rhea says so and compares nothing.",
+    },
+    {
+      q: "How do I know the estimate is any good?",
+      a: "Rhea freezes each day’s numbers when you see them and checks them against what the room sold, then states the count: for example, “within 10% on 22 of the last 28 days.”",
+    },
+    {
+      q: "Does Rhea build the schedule?",
+      a: "No. It gives you the hours. You write the schedule, in the tool you already use.",
+    },
+  ],
 };
 
 /* ------------------------------------------------------------------ */
