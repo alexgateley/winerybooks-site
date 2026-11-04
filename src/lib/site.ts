@@ -10,6 +10,7 @@ export const DEMO_URL = "https://demo.rheafi.com/demo";
 
 /** Rhea's own site, and its privacy notice and terms (winerybooks.com has no legal pages of its own). */
 export const RHEA_URL = "https://rheafi.com/";
+export const FRANCHIFI_URL = "https://franchifi.com/";
 export const PRIVACY_URL = "https://rheafi.com/privacy/";
 export const TERMS_URL = "https://rheafi.com/terms/";
 
