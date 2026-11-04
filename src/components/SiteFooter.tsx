@@ -69,7 +69,7 @@ export function SiteFooter() {
         </div>
 
         <p className="mt-10 text-[0.9375rem] text-muted">
-          Also from {LEGAL_ENTITY.replace(" LLC", "")}:{" "}
+          Also from Grip Theory:{" "}
           <a href={RHEA_URL} rel="noopener" className="rounded-md underline underline-offset-4 hover:text-ink">
             rheafi.com
           </a>
